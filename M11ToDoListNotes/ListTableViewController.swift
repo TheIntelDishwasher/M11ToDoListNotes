@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import WidgetKit
 
 extension Notification.Name{
     static let toDoDidInsert = Notification.Name("toDoDidInsert")
@@ -26,6 +27,7 @@ class ListTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let center = NotificationCenter.default
+        //let mainQueue = OperationQueue.main
         center.addObserver(forName: NSNotification.Name("toDoDidInsert"), object: nil, queue: .main) { noti in
             if let todo = noti.userInfo?["todo"] as? String {
                 self.toDoList.append(todo)
