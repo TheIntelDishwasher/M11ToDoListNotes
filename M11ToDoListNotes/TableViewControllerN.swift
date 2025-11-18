@@ -1,37 +1,16 @@
 //
-//  ListTableViewController.swift
+//  TableViewControllerN.swift
 //  M11ToDoListNotes
 //
-//  Created by Wagner, Randall D. on 11/11/25.
+//  Created by Wagner, Randall D. on 11/17/25.
 //
 
 import UIKit
 
-extension Notification.Name{
-    static let toDoDidInsert = Notification.Name("toDoDidInsert")
-}
+class TableViewControllerN: UITableViewController {
 
-class ListTableViewController: UITableViewController {
-    
-    var toDoList: [String] = []
-    
-    @IBOutlet var toDoTableView: UITableView!
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vc = segue.destination.children.first as? AddListViewController {
-            vc.delegate = self
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        let center = NotificationCenter.default
-        center.addObserver(forName: NSNotification.Name("toDoDidInsert"), object: nil, queue: .main) { noti in
-            if let todo = noti.userInfo?["todo"] as? String {
-                self.toDoList.append(todo)
-                self.toDoTableView.reloadData()
-            }
-        }
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -44,24 +23,23 @@ class ListTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return 0
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return toDoList.count
+        return 0
     }
 
-    
+    /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell1", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
 
         // Configure the cell...
-        cell.textLabel?.text = "\(toDoList[indexPath.row])"
 
         return cell
     }
-    
+    */
 
     /*
     // Override to support conditional editing of the table view.
@@ -109,23 +87,3 @@ class ListTableViewController: UITableViewController {
     */
 
 }
-
-extension ListTableViewController: ToDoDelegate {
-    func addViewController(_ vc: UIViewController, didAddToDo todo: String) {
-        toDoList.append(todo)
-        toDoTableView.reloadData()
-    }
-}
-
-/*
- extension ListTableViewController: UITableViewDataSource {
-     func numberOfSections(in tableView: UITableView) -> Int {
-         return 1
-     }
-     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-         return toDoList.count
-     }
- }
- */
-
-
