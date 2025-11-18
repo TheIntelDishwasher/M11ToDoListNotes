@@ -7,9 +7,14 @@
 
 import UIKit
 
+enum Key{
+    case toDo
+}
+
 class AddListViewController: UIViewController {
     
     var delegate: ToDoDelegate?
+    var listVC: ListTableViewController?
 
     @IBOutlet weak var inputField: UITextField!
     
@@ -23,17 +28,20 @@ class AddListViewController: UIViewController {
             showAlert()
             return
         }
-        delegate?.addViewController(self, didAddToDo: text)
+        let center = NotificationCenter.default
+        center.post(name: NSNotification.Name("toDoDidInsert"), object: nil, userInfo: ["todo":text])
+        //delegate?.addViewController(self, didAddToDo: text)
+        /*
+         
+         */
         dismiss(animated: true)
-        
     }
     
     func showAlert(){
-        let alertController = UIAlertController(title: "Error", message: "Please enter a list name", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: .default) { (_) in
-        }
-        alertController.addAction(okAction)
-        present(alertController, animated: true)
+        let alert = UIAlertController(title: "Error", message: "Please enter a task", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: .default)
+        alert.addAction(okAction)
+        present(alert, animated: true)
     }
   
          

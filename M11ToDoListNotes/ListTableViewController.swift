@@ -7,6 +7,10 @@
 
 import UIKit
 
+extension Notification.Name{
+    static let toDoDidInsert = Notification.Name("toDoDidInsert")
+}
+
 class ListTableViewController: UITableViewController {
     
     var toDoList: [String] = []
@@ -21,6 +25,13 @@ class ListTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let center = NotificationCenter.default
+        center.addObserver(forName: NSNotification.Name("toDoDidInsert"), object: nil, queue: .main) { noti in
+            if let todo = noti.userInfo?["todo"] as? String {
+                self.toDoList.append(todo)
+                self.toDoTableView.reloadData()
+            }
+        }
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -33,23 +44,24 @@ class ListTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return toDoList.count
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return toDoList.count
     }
 
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell1", for: indexPath)
 
         // Configure the cell...
+        cell.textLabel?.text = "\(toDoList[indexPath.row])"
 
         return cell
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.
@@ -103,6 +115,17 @@ extension ListTableViewController: ToDoDelegate {
         toDoList.append(todo)
         toDoTableView.reloadData()
     }
-
 }
+
+/*
+ extension ListTableViewController: UITableViewDataSource {
+     func numberOfSections(in tableView: UITableView) -> Int {
+         return 1
+     }
+     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+         return toDoList.count
+     }
+ }
+ */
+
 
