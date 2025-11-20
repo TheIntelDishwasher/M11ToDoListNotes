@@ -9,6 +9,6 @@ import UIKit
 //objective-c protocol
 //swift protocol
 @objc protocol ToDoDelegate{
-    func addViewController(_ vc: UIViewController, didAddToDo todo: String)
-    @objc optional func addViewControllerCancel(_ vc: UIViewController)
+    func addViewControllerD(_ vc: UIViewController, didAddToDo todo: String)
+    @objc optional func addViewControllerDCancel(_ vc: UIViewController)
 }

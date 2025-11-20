@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import WidgetKit
 
 extension Notification.Name{
     static let toDoDidInsert = Notification.Name("toDoDidInsert")
@@ -16,41 +15,39 @@ class ListTableViewController: UITableViewController {
     
     var toDoList: [String] = []
     
-    @IBOutlet var toDoTableView: UITableView!
+    @IBOutlet var toDoTableViewN: UITableView!
     
+    @IBAction func backButton(_ sender: Any) {
+        dismiss(animated: true)
+    }
+    /*
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let vc = segue.destination.children.first as? AddListViewController {
             vc.delegate = self
         }
     }
+    */
     
     override func viewDidLoad() {
         super.viewDidLoad()
         let center = NotificationCenter.default
-        //let mainQueue = OperationQueue.main
-        center.addObserver(forName: NSNotification.Name("toDoDidInsert"), object: nil, queue: .main) { noti in
+        center.addObserver(forName: .toDoDidInsert, object: nil, queue: .main) { noti in
             if let todo = noti.userInfo?["todo"] as? String {
                 self.toDoList.append(todo)
-                self.toDoTableView.reloadData()
+                self.toDoTableViewN.reloadData()
             }
         }
-
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
+        
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
+        
         return toDoList.count
     }
 
@@ -58,7 +55,7 @@ class ListTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell1", for: indexPath)
 
-        // Configure the cell...
+        
         cell.textLabel?.text = "\(toDoList[indexPath.row])"
 
         return cell
@@ -112,12 +109,14 @@ class ListTableViewController: UITableViewController {
 
 }
 
+/*
 extension ListTableViewController: ToDoDelegate {
     func addViewController(_ vc: UIViewController, didAddToDo todo: String) {
         toDoList.append(todo)
         toDoTableView.reloadData()
     }
 }
+*/
 
 /*
  extension ListTableViewController: UITableViewDataSource {

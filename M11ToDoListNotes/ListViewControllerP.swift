@@ -7,8 +7,16 @@
 
 import UIKit
 
-class ListViewControllerP: UIViewController {
-
+class ListViewControllerP: UIViewController, UITableViewDataSource {
+    
+    var toDoList: [String] = []
+    
+    @IBOutlet weak var toDoTableViewP: UITableView!
+    
+    @IBAction func backButton(_ sender: Any) {
+        dismiss(animated: true)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -26,4 +34,20 @@ class ListViewControllerP: UIViewController {
     }
     */
 
+}
+
+extension ListViewControllerP {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell1", for: indexPath)
+        cell.textLabel?.text = "\(toDoList[indexPath.row])"
+
+        return cell
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return toDoList.count
+    }
 }

@@ -1,4 +1,11 @@
 //
+//  ListViewTableControllerD.swift
+//  M11ToDoListNotes
+//
+//  Created by Wagner, Randall D. on 11/18/25.
+//
+
+//
 //  TableViewControllerD.swift
 //  M11ToDoListNotes
 //
@@ -7,8 +14,23 @@
 
 import UIKit
 
-class TableViewControllerD: UITableViewController {
-
+class ListTableViewControllerD: UITableViewController {
+    
+    
+    @IBOutlet var toDoTableViewD: UITableView!
+    
+    var toDoList: [String] = []
+    
+    @IBAction func backButton(_ sender: Any) {
+        dismiss(animated: true)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination.children.first as? AddListViewControllerD {
+            vc.delegate = self
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -23,23 +45,22 @@ class TableViewControllerD: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        return toDoList.count
     }
+    
 
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell1", for: indexPath)
+        cell.textLabel?.text = "\(toDoList[indexPath.row])"
         return cell
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.
@@ -57,7 +78,7 @@ class TableViewControllerD: UITableViewController {
             tableView.deleteRows(at: [indexPath], with: .fade)
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+        }
     }
     */
 
@@ -87,3 +108,11 @@ class TableViewControllerD: UITableViewController {
     */
 
 }
+
+extension ListTableViewControllerD: ToDoDelegate {
+    func addViewControllerD(_ vc: UIViewController, didAddToDo todo: String) {
+        toDoList.append(todo)
+        toDoTableViewD.reloadData()
+    }
+}
+

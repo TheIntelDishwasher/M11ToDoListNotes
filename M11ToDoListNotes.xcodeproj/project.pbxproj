@@ -6,8 +6,13 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		7CF901612ECD6C980072ECFA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CF901602ECD6C980072ECFA /* Foundation.framework */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		7C39B63D2EC3D87B006130A1 /* M11ToDoListNotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = M11ToDoListNotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7CF901602ECD6C980072ECFA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -36,6 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7CF901612ECD6C980072ECFA /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -46,6 +52,7 @@
 			isa = PBXGroup;
 			children = (
 				7C39B63F2EC3D87B006130A1 /* M11ToDoListNotes */,
+				7CF9015F2ECD6C980072ECFA /* Frameworks */,
 				7C39B63E2EC3D87B006130A1 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -56,6 +63,14 @@
 				7C39B63D2EC3D87B006130A1 /* M11ToDoListNotes.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		7CF9015F2ECD6C980072ECFA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7CF901602ECD6C980072ECFA /* Foundation.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
