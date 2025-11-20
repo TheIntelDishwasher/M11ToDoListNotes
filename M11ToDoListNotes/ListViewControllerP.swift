@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ListViewControllerP: UIViewController, UITableViewDataSource {
+class ListViewControllerP: UIViewController {
     
     var toDoList: [String] = []
     
@@ -17,10 +17,13 @@ class ListViewControllerP: UIViewController, UITableViewDataSource {
         dismiss(animated: true)
     }
     
+    func addItem(item: String) {
+        toDoList.append(item)
+        toDoTableViewP.reloadData()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
     }
     
 
@@ -36,7 +39,7 @@ class ListViewControllerP: UIViewController, UITableViewDataSource {
 
 }
 
-extension ListViewControllerP {
+extension ListViewControllerP: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell1", for: indexPath)
         cell.textLabel?.text = "\(toDoList[indexPath.row])"

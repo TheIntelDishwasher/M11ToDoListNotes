@@ -13,18 +13,15 @@ enum Key{
 
 class AddListViewController: UIViewController {
     
-    //var delegate: ToDoDelegate?
-    //var listVC: ListTableViewController?
 
     @IBOutlet weak var inputField: UITextField!
     
     @IBAction func cancel(_ sender: Any) {
-        //delegate?.addViewControllerCancel?(self)
         dismiss(animated: true)
     }
     
     @IBAction func save(_ sender: Any) {
-        guard let text = inputField.text, !text.isEmpty else{
+        guard let text: String = inputField.text, !text.isEmpty else{
             showAlert()
             return
         }

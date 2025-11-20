@@ -31,13 +31,15 @@ class ListTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let center = NotificationCenter.default
-        center.addObserver(forName: .toDoDidInsert, object: nil, queue: .main) { noti in
+        center.addObserver(forName: .toDoDidInsert, object: nil, queue: .main) { (noti) in
             if let todo = noti.userInfo?["todo"] as? String {
                 self.toDoList.append(todo)
                 self.toDoTableViewN.reloadData()
             }
         }
     }
+
+
 
     // MARK: - Table view data source
 

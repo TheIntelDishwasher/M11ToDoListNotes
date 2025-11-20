@@ -9,7 +9,6 @@ import UIKit
 
 class AddListViewControllerP: UIViewController {
     
-    var newItem: String = ""
     
     @IBOutlet weak var inputField: UITextField!
     
@@ -18,13 +17,15 @@ class AddListViewControllerP: UIViewController {
     }
     
     @IBAction func save(_ sender: Any) {
-        guard let item = inputField.text else { return }
-        newItem = item
+        guard let item: String = inputField.text, !inputField.state.isEmpty else { return }
+        let listVC = storyboard?.instantiateViewController(withIdentifier: "To Do List P") as! ListViewControllerP
+        listVC.addItem(item: item)
         dismiss(animated: true)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
     }
     
 
@@ -39,3 +40,4 @@ class AddListViewControllerP: UIViewController {
     */
 
 }
+
